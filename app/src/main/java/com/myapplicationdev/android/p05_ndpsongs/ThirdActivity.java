@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,10 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ThirdActivity extends AppCompatActivity {
 
     EditText etID, etTitle, etSingers, etYear;
-    RadioButton rb1, rb2, rb3, rb4, rb5;
+    //RadioButton rb1, rb2, rb3, rb4, rb5;
     Button btnCancel, btnUpdate, btnDelete;
-    RadioGroup rg;
-
+    //RadioGroup rg;
+    RatingBar rb2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,12 @@ public class ThirdActivity extends AppCompatActivity {
 
         setTitle(getTitle().toString() + " ~ " + getResources().getText(R.string.title_activity_third));
 
-        rb1 = (RadioButton) findViewById(R.id.radio1);
-        rb2 = (RadioButton) findViewById(R.id.radio2);
-        rb3 = (RadioButton) findViewById(R.id.radio3);
-        rb4 = (RadioButton) findViewById(R.id.radio4);
-        rb5 = (RadioButton) findViewById(R.id.radio5);
-        rg = (RadioGroup) findViewById(R.id.rgStars);
+        //rb1 = (RadioButton) findViewById(R.id.radio1);
+        //rb2 = (RadioButton) findViewById(R.id.radio2);
+        //rb3 = (RadioButton) findViewById(R.id.radio3);
+        //rb4 = (RadioButton) findViewById(R.id.radio4);
+        //rb5 = (RadioButton) findViewById(R.id.radio5);
+        //rg = (RadioGroup) findViewById(R.id.rgStars);
         btnCancel = (Button) findViewById(R.id.btnCancel);
         btnDelete = (Button) findViewById(R.id.btnDelete);
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
@@ -39,6 +40,7 @@ public class ThirdActivity extends AppCompatActivity {
         etTitle = (EditText) findViewById(R.id.etTitle);
         etSingers = (EditText) findViewById(R.id.etSingers);
         etYear = (EditText) findViewById(R.id.etYear);
+        rb2 = findViewById(R.id.ratingBar4);
 
         Intent i = getIntent();
         final Song currentSong = (Song) i.getSerializableExtra("song");
@@ -47,17 +49,20 @@ public class ThirdActivity extends AppCompatActivity {
         etTitle.setText(currentSong.getTitle());
         etSingers.setText(currentSong.getSingers());
         etYear.setText(currentSong.getYearReleased()+"");
-        switch (currentSong.getStars()){
-            case 5: rb5.setChecked(true);
-                    break;
-            case 4: rb4.setChecked(true);
-                    break;
-            case 3: rb3.setChecked(true);
-                    break;
-            case 2: rb2.setChecked(true);
-                    break;
-            case 1: rb1.setChecked(true);
-        }
+
+        rb2.setRating((float) currentSong.getStars());
+
+        //switch (currentSong.getStars()){
+        //    case 5: rb5.setChecked(true);
+        //            break;
+        //    case 4: rb4.setChecked(true);
+        //            break;
+        //    case 3: rb3.setChecked(true);
+        //            break;
+        //    case 2: rb2.setChecked(true);
+        //            break;
+        //    case 1: rb1.setChecked(true);
+        //}
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,9 +79,9 @@ public class ThirdActivity extends AppCompatActivity {
                 }
                 currentSong.setYearReleased(year);
 
-                int selectedRB = rg.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) findViewById(selectedRB);
-                currentSong.setStars(Integer.parseInt(rb.getText().toString()));
+                //int selectedRB = rg.getCheckedRadioButtonId();
+                //RadioButton rb = (RadioButton) findViewById(selectedRB);
+                currentSong.setStars((int) rb2.getRating());
                 int result = dbh.updateSong(currentSong);
                 if (result>0){
                     Toast.makeText(ThirdActivity.this, "Song updated", Toast.LENGTH_SHORT).show();

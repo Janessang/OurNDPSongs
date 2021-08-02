@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -11,6 +13,12 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#6200EE" />
+
+    <TextView
+        android:id="@+id/textViewSinger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#7AF6E8" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,18 +32,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/textViewStars"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/newsong" />
+
+        <RatingBar
+            android:id="@+id/ratingBar2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:textColor="#E91E63" />
-    </LinearLayout>
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="1" />
 
-    <TextView
-        android:id="@+id/textViewSinger"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#7AF6E8" />
+    </LinearLayout>
 
 </LinearLayout>

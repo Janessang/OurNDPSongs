@@ -19,7 +19,6 @@ public class SecondActivity extends AppCompatActivity {
     ArrayList<Song> songList;
     CustomAdapter adapter;
 	//ArrayAdapter<Song> adapter;
-	String moduleCode;
     Button btn5Stars;
 
     ArrayList<String> years;

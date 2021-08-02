@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,15 +35,25 @@ public class CustomAdapter extends ArrayAdapter {
 
         TextView tvTitle = rowView.findViewById(R.id.textViewTitle);
         TextView tvYear = rowView.findViewById(R.id.textViewYear);
-        TextView tvStars = rowView.findViewById(R.id.textViewStars);
+        //TextView tvStars = rowView.findViewById(R.id.textViewStars);
         TextView tvSinger = rowView.findViewById(R.id.textViewSinger);
+        ImageView ivNew = rowView.findViewById(R.id.imageView);
+        RatingBar rb = rowView.findViewById(R.id.ratingBar2);
 
         Song current = songList.get(position);
 
         tvTitle.setText(current.getTitle());
         tvYear.setText(Integer.toString(current.getYearReleased()));
-        tvStars.setText(current.toString());
+
+        rb.setRating(current.getStars());
         tvSinger.setText(current.getSingers());
+
+        if(current.getYearReleased() >= 2019) {
+            ivNew.setVisibility(View.VISIBLE);
+
+        } else {
+            ivNew.setVisibility(View.INVISIBLE);
+        }
 
         return rowView;
     }
